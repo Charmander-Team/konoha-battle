@@ -9,7 +9,7 @@ pygame.display.set_caption("Konoha Battle")
 screen = pygame.display.set_mode((1080, 720))
 
 # Importer background
-background = pygame.image.load('assets/bg.jpg')
+background = pygame.image.load('assets/bg_forest.jpg')
 
 # Charger la banniere
 banner = pygame.image.load('assets/naruto_banner.png')
@@ -34,7 +34,8 @@ running = True
 while running:
 
     # Appliquer le background
-    screen.blit(background, (0, -200))
+    background = pygame.transform.scale(background, (1080, 720))
+    screen.blit(background, (0, 0))
 
     # Verifier si le jeu a commencé
     if game.is_playing:
