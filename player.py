@@ -51,3 +51,21 @@ class Player(pygame.sprite.Sprite):
 
     def move_left(self):
         self.rect.x -= self.velocity
+
+    def kyuubi_transformation(self):
+        self.attack = 110
+        self.velocity = 3
+        self.health = 150
+        self.max_health = 150
+
+        self.image = pygame.image.load('assets/naruto_kyuubi.png')
+        self.image = pygame.transform.scale(self.image, (148*1.6, 125*1.6))
+
+    def cancel_transformation(self):
+        self.attack = 55
+        self.velocity = 1
+        self.health = 100
+        self.max_health = 100
+
+        self.image = pygame.image.load('assets/naruto.png')
+        self.image = pygame.transform.scale(self.image, (440/3, 550/3))

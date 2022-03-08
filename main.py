@@ -65,6 +65,10 @@ while running:
 
             if event.key == pygame.K_SPACE:
                 game.player.launch_projectile()
+            elif event.key == pygame.K_x:
+                game.player.kyuubi_transformation()
+            elif event.key == pygame.K_w:
+                game.player.cancel_transformation()
 
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
