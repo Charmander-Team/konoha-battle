@@ -42,11 +42,11 @@ while running:
         game.update(screen)
     # Si le jeu n'a pas commencé
     else:
-        # Ajout de l'ecran de bienvenue
+        # Ajout de l'écran de bienvenue
         screen.blit(play_button, play_button_rect)
         screen.blit(banner, banner_rect)
 
-    # Mettre a jour l'ecran
+    # Mettre a jour l'écran
     pygame.display.flip()
 
     # Si le joueur ferme la fenetre

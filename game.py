@@ -13,7 +13,7 @@ class Game:
         self.player = Player(self)
         self.all_players.add(self.player)
 
-        # Groupe d'ennemis'
+        # Groupe d'ennemis
         self.all_opponents = pygame.sprite.Group()
 
         self.pressed = {}
@@ -21,14 +21,13 @@ class Game:
     def start(self):
         self.is_playing = True
 
-        # On genere 2 ennemies + 1 "boss"
+        # On genere 1 ennemi + 1 "boss"
         self.spawn_opponent(Kabuto)
-        #self.spawn_opponent(Kabuto)
         self.spawn_opponent(Orochimaru)
 
 
     def game_over(self):
-        # Reset du jeu (retirer les opponents, remettre le joueur a 100 de vie, remettre la banniere de lancement)
+        # Reset du jeu (retirer les ennemis, remettre le joueur a 100 de vie, remettre la banniere de lancement)
         self.all_opponents = pygame.sprite.Group()
         self.player.health = self.player.max_health
         self.is_playing = False
@@ -44,7 +43,7 @@ class Game:
         for projectile in self.player.all_projectiles:
             projectile.move()
 
-        # Recuperer les monstres
+        # Recuperer les ennemis
         for monster in self.all_opponents:
             monster.forward()
             monster.update_health_bar(screen)
@@ -52,7 +51,7 @@ class Game:
         # Appliquer les images du groupe de projectiles
         self.player.all_projectiles.draw(screen)
 
-        # Appliqur l'ensemble des images de mon groupe de monstres
+        # Appliqur l'ensemble des images de mon groupe d'ennemis'
         self.all_opponents.draw(screen)
 
         # Verifier si le joueur va a gauche ou a droite

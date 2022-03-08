@@ -17,7 +17,7 @@ class Opponent(pygame.sprite.Sprite):
 
         # Verifier si sa vie est < 0
         if self.health <= 0:
-            # Réapparaitre (comme un nouveau monstre)
+            # Réapparaitre (comme un nouvel ennemi)
             self.rect.x = 1000 + random.randint(0, 300)
             self.health = self.max_health
 
@@ -39,7 +39,7 @@ class Opponent(pygame.sprite.Sprite):
         # Déplacement possible SI il n'y a pas de collision
         if not self.game.check_collision(self, self.game.all_players):
             self.rect.x -= self.velocity
-        # Sinon (le monstre est en collision avec le joueur)
+        # Sinon (l'annemi est en collision avec le joueur)
         else:
             # Infliger des dégats au joueur
             self.game.player.damage(self.attack)
@@ -52,12 +52,12 @@ class Orochimaru(Opponent):
         self.health = 200
         self.max_health = 200
 
-        # Recuperer Image
+        # Recuperer l'image d'Orochimaru
         self.image = pygame.image.load('assets/orochimaru.png')
         self.image = pygame.transform.scale(self.image, (148*1.5, 125*1.5))
         self.rect = self.image.get_rect()
 
-        # Positionner monster
+        # Positionner l'image
         self.rect.x = 1000 + random.randint(0, 300)
         self.rect.y = 510
 
@@ -75,12 +75,12 @@ class Kabuto(Opponent):
     def __init__(self, game):
         super().__init__(game)
 
-        # Recuperer Image
+        # Recuperer l'image de Kabuto
         self.image = pygame.image.load('assets/kabuto.png')
         self.image = pygame.transform.scale(self.image, (148*1.5, 125*1.5))
         self.rect = self.image.get_rect()
 
-        # Positionner monster
+        # Positionner l'image
         self.rect.x = 1000 + random.randint(0, 300)
         self.rect.y = 510
 

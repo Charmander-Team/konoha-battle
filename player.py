@@ -45,7 +45,7 @@ class Player(pygame.sprite.Sprite):
         self.all_projectiles.add(Projectile(self))
 
     def move_right(self):
-        # Si le joueur n'est pas en collision avec un monstre
+        # Si le joueur n'est pas en collision avec un ennemi
         if not self.game.check_collision(self, self.game.all_monsters):
             self.rect.x += self.velocity
 
