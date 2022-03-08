@@ -21,7 +21,9 @@ class Game:
     def start(self):
         self.is_playing = True
 
-        # On genere 1 ennemi + 1 "boss"
+        # On genere 3 ennemis + 1 "boss"
+        self.spawn_opponent(Kabuto)
+        self.spawn_opponent(Kabuto)
         self.spawn_opponent(Kabuto)
         self.spawn_opponent(Orochimaru)
 
