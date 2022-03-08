@@ -3,13 +3,22 @@ import random
 
 class Opponent(pygame.sprite.Sprite):
 
-    def __init__(self, game):
+    def __init__(self, game, name):
         super().__init__()
         self.game = game
         self.health = 100
         self.max_health = 100
         self.attack = 0.5
+        self.velocity = 1
 
+        # Recuperer l'image de l'ennemi
+        self.image = pygame.image.load('assets/' + name + '.png')
+        self.image = pygame.transform.scale(self.image, (148*1.5, 125*1.5))
+        self.rect = self.image.get_rect()
+
+        # Positionner l'image
+        self.rect.x = 1000 + random.randint(0, 300)
+        self.rect.y = 510
 
     def damage(self, amount):
         # Infliger les dégats
@@ -48,20 +57,9 @@ class Opponent(pygame.sprite.Sprite):
 class Orochimaru(Opponent):
 
     def __init__(self, game):
-        super().__init__(game)
+        super().__init__(game, "orochimaru")
         self.health = 200
         self.max_health = 200
-
-        # Recuperer l'image d'Orochimaru
-        self.image = pygame.image.load('assets/orochimaru.png')
-        self.image = pygame.transform.scale(self.image, (148*1.5, 125*1.5))
-        self.rect = self.image.get_rect()
-
-        # Positionner l'image
-        self.rect.x = 1000 + random.randint(0, 300)
-        self.rect.y = 510
-
-        self.velocity = 1
 
     def update_health_bar(self, surface):
 
@@ -73,15 +71,4 @@ class Orochimaru(Opponent):
 class Kabuto(Opponent):
 
     def __init__(self, game):
-        super().__init__(game)
-
-        # Recuperer l'image de Kabuto
-        self.image = pygame.image.load('assets/kabuto.png')
-        self.image = pygame.transform.scale(self.image, (148*1.5, 125*1.5))
-        self.rect = self.image.get_rect()
-
-        # Positionner l'image
-        self.rect.x = 1000 + random.randint(0, 300)
-        self.rect.y = 510
-
-        self.velocity = 1
+        super().__init__(game, "kabuto")
