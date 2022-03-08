@@ -46,7 +46,7 @@ class Player(pygame.sprite.Sprite):
 
     def move_right(self):
         # Si le joueur n'est pas en collision avec un ennemi
-        if not self.game.check_collision(self, self.game.all_monsters):
+        if not self.game.check_collision(self, self.game.all_opponents):
             self.rect.x += self.velocity
 
     def move_left(self):
