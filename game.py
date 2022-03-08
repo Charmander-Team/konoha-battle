@@ -1,6 +1,6 @@
 import pygame
 from player import Player
-from monster import Monster
+from opponent import Orochimaru, Kabuto
 
 class Game:
 
@@ -13,21 +13,23 @@ class Game:
         self.player = Player(self)
         self.all_players.add(self.player)
 
-        # Groupe de monstres
-        self.all_monsters = pygame.sprite.Group()
+        # Groupe d'ennemis'
+        self.all_opponents = pygame.sprite.Group()
 
         self.pressed = {}
 
     def start(self):
         self.is_playing = True
 
-        # On genere 2 monstres
-        self.spawn_monster()
-        self.spawn_monster()
+        # On genere 2 ennemies + 1 "boss"
+        self.spawn_opponent(Kabuto)
+        #self.spawn_opponent(Kabuto)
+        self.spawn_opponent(Orochimaru)
+
 
     def game_over(self):
-        # Reset du jeu (retirer les monstres, remettre le joueur a 100 de vie, remettre la banniere de lancement)
-        self.all_monsters = pygame.sprite.Group()
+        # Reset du jeu (retirer les opponents, remettre le joueur a 100 de vie, remettre la banniere de lancement)
+        self.all_opponents = pygame.sprite.Group()
         self.player.health = self.player.max_health
         self.is_playing = False
 
@@ -43,7 +45,7 @@ class Game:
             projectile.move()
 
         # Recuperer les monstres
-        for monster in self.all_monsters:
+        for monster in self.all_opponents:
             monster.forward()
             monster.update_health_bar(screen)
 
@@ -51,7 +53,7 @@ class Game:
         self.player.all_projectiles.draw(screen)
 
         # Appliqur l'ensemble des images de mon groupe de monstres
-        self.all_monsters.draw(screen)
+        self.all_opponents.draw(screen)
 
         # Verifier si le joueur va a gauche ou a droite
         if self.pressed.get(pygame.K_RIGHT) and self.player.rect.x + self.player.rect.width < screen.get_width():
@@ -62,6 +64,5 @@ class Game:
     def check_collision(self, sprite, group):
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
 
-    def spawn_monster(self):
-        monster = Monster(self)
-        self.all_monsters.add(monster)
+    def spawn_opponent(self, opponents_class_name):
+        self.all_opponents.add(opponents_class_name.__call__(self))

@@ -6,7 +6,6 @@ class Projectile(pygame.sprite.Sprite):
         super().__init__()
         self.velocity = 1
         self.player = player
-        # self.image = pygame.image.load('assets/projectile.png')
         self.image = pygame.image.load('assets/rasengan.png')
 
         # Reduction de l'image du projectile
@@ -34,14 +33,14 @@ class Projectile(pygame.sprite.Sprite):
         self.rect.x += self.velocity
         self.rotate()
 
-        # Verifier si le projectile entre en collision avec un monstre
-        for monster in self.player.game.check_collision(self, self.player.game.all_monsters):
+        # Verifier si le projectile entre en collision avec un ennemie
+        for opponent in self.player.game.check_collision(self, self.player.game.all_opponents):
             # Suppression du projectile
             self.remove()
             # Infliger des dégats
-            monster.damage(self.player.attack)
+            opponent.damage(self.player.attack)
 
-        # Verifier si le projectile sort de l'ecran
+        # Verifier si le projectile sort de l'écran
         if self.rect.x > 1080:
             # Suppression du projectile
             self.remove()
