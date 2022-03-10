@@ -35,7 +35,7 @@ class Game:
         self.all_opponents = pygame.sprite.Group()
         self.player.health = self.player.max_health
         self.is_playing = False
-        #jouer le son
+        # Jouer le son
         game_over_song = pygame.mixer.Sound("assets/sounds/game_over.ogg")
         game_over_song.play()
 

@@ -16,7 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.all_projectiles = pygame.sprite.Group()
 
         self.image = pygame.image.load('assets/' + name + '.png')
-        self.image = pygame.transform.scale(self.image, (440/3, 550/3))
+        self.image = pygame.transform.scale(self.image, (self.image.get_width() * 1.6, self.image.get_height() * 1.6))
 
         self.rect = self.image.get_rect()
         self.rect.x = 400
@@ -66,7 +66,7 @@ class Player(pygame.sprite.Sprite):
         self.powermode = True
 
         self.image = pygame.image.load('assets/' + self.name + '_powermode.png')
-        self.image = pygame.transform.scale(self.image, (148*1.6, 125*1.6))
+        self.image = pygame.transform.scale(self.image, (self.image.get_width() * 1.6, self.image.get_height() * 1.6))
 
     def cancel_transformation(self):
         self.attack = 55
@@ -76,4 +76,4 @@ class Player(pygame.sprite.Sprite):
         self.powermode = False
 
         self.image = pygame.image.load('assets/' + self.name + '.png')
-        self.image = pygame.transform.scale(self.image, (440/3, 550/3))
+        self.image = pygame.transform.scale(self.image, (self.image.get_width() * 1.6, self.image.get_height() * 1.6))
