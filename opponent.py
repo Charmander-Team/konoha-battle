@@ -30,12 +30,11 @@ class Opponent(pygame.sprite.Sprite):
 
         # Verifier si sa vie est < 0
         if self.health <= 0:
+            
             # Réapparaitre (comme un nouvel ennemi)
-            self.rect.x = 1000 + random.randint(0, 300)
+            # self.rect.x = 1000 + random.randint(0, 300)
             self.health = self.max_health
             
-            # incrémentation du score
-            self.game.score += self.scoreIncrement
 
     def update_health_bar(self, surface):
         # Definir une couleur pour la jauge de vie
@@ -75,6 +74,14 @@ class Orochimaru(Opponent):
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 10, self.max_health, 7])
         pygame.draw.rect(surface, (59, 226, 18), [self.rect.x, self.rect.y - 10, self.health, 7])
 
+    def damage(self, amount):
+        # Infliger les dégats
+        self.health -= amount
+
+        # Verifier si sa vie est < 0
+        if self.health <= 0:
+            self.kill()
+                        
 
 class Kabuto(Opponent):
 
