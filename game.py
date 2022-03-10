@@ -1,6 +1,8 @@
 import pygame
+import json 
 from player import Player
 from opponent import Orochimaru, Kabuto
+
 
 class Game:
 
@@ -21,6 +23,9 @@ class Game:
         # Récupérer ennemis
         self.score = 0
 
+        # Set pseudo
+        self.pseudo = ""
+
     def start(self):
         self.is_playing = True
 
@@ -37,14 +42,30 @@ class Game:
         self.player.health = self.player.max_health
         self.is_playing = False
 
+        with open("score.json", 'r') as objfile:
+        
+            data = json.loads(objfile.read())
+
+            data.append({"pseudo": self.pseudo, "score": self.score})
+            
+            jsn = json.dumps(data, sort_keys=True, indent=4, 
+                            separators=(',', ': '), ensure_ascii=False)
+
+        with open("score.json", 'wb') as outfile:
+            outfile.write(jsn.encode('utf-8', 'replace'))
+
+        self.score = 0
+
     def update(self, screen,pseudo):
         # Appliquer l'image du joueur
         screen.blit(self.player.image, self.player.rect)
         
         # Afficher le pseudo du joueur
+        self.pseudo = pseudo
         police = pygame.font.SysFont("monospace",25)
         pseudoTxt = police.render(pseudo,1,(0,0,0))
         screen.blit(pseudoTxt, (30,30))
+
         
         # Afficher le score du joueur
         # scoreTxt = police.render(str(self.player.score),1,(0,0,0))

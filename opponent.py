@@ -20,8 +20,7 @@ class Opponent(pygame.sprite.Sprite):
         self.rect.x = 1000 + random.randint(0, 300)
         self.rect.y = 510
 
-        # Init score du player
-        self.score = 0
+        # Init score incrément de l'ennemi
         self.scoreIncrement = 0
 
     def damage(self, amount):

@@ -20,9 +20,6 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = 400
         self.rect.y = 500
 
-        #Initialisation du score
-        self.score = 0
-
     def damage(self, amount):
         if self.health - amount > amount:
             self.health -= amount
