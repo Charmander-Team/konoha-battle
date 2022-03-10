@@ -87,11 +87,11 @@ while running:
                 # Incarner Naruto
                 game.start("naruto")
                 # Jouer le son
-                click_song = pygame.mixer.Sound("assets/sounds/click.ogg")
+                click_song = pygame.mixer.Sound("assets/sounds/naruto_voice.mp3")
                 click_song.play()
             elif play_button_sakura_rect.collidepoint(event.pos):
                 # Incarner Sakura
                 game.start("sakura")
                 # Jouer le son
-                click_song = pygame.mixer.Sound("assets/sounds/click.ogg")
+                click_song = pygame.mixer.Sound("assets/sounds/sakura_voice.mp3")
                 click_song.play()

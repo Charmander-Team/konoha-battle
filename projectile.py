@@ -2,14 +2,15 @@ import pygame
 
 class Projectile(pygame.sprite.Sprite):
 
-    def __init__(self, player, type):
+    def __init__(self, player, type, sound):
         super().__init__()
         self.velocity = 1
         self.player = player
         self.image = pygame.image.load('assets/' + type + '.png')
-        #jouer le son 
-        tir_song = pygame.mixer.Sound ("assets/sounds/tir.ogg")
-        tir_song.play()
+
+        # Jouer le son
+        attack_sound = pygame.mixer.Sound('assets/sounds/' + sound + '.mp3')
+        attack_sound.play()
 
         # Reduction de l'image du projectile
         self.image = pygame.transform.scale(self.image, (70, 70))
