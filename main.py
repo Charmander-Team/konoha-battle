@@ -1,3 +1,4 @@
+import pygame_textinput
 import pygame
 import math
 from game import Game
@@ -26,6 +27,11 @@ play_button_rect = play_button.get_rect()
 play_button_rect.x = math.ceil(screen.get_width() / 3.33)
 play_button_rect.y = math.ceil(screen.get_height() / 2)
 
+# Définir la zonne de saisie de texte du joueur
+textinput = pygame_textinput.TextInputVisualizer()
+# clock = pygame.time.Clock()
+pseudo=""
+
 # Charger le jeu
 game = Game()
 
@@ -40,12 +46,39 @@ while running:
     # Verifier si le jeu a commencé
     if game.is_playing:
         # Déclencher les instructions de partie
-        game.update(screen)
+        game.update(screen,pseudo)
+        
     # Si le jeu n'a pas commencé
     else:
-        # Ajout de l'écran de bienvenue
-        screen.blit(play_button, play_button_rect)
-        screen.blit(banner, banner_rect)
+        if pseudo=="":
+            # Le joueur renseigne son pseudo
+            events = pygame.event.get()
+
+            textinput.update(events)
+            textinput.cursor_blink_interval = 100
+            width, height = screen.get_size()
+            screen.blit(textinput.surface, (-400+width/2, height/2))
+
+            color = (0,0,0) 
+            pygame.draw.rect(screen, color, pygame.Rect(-405+width/2, -5+height/2, 700, 40),  2)
+
+            police = pygame.font.SysFont("monospace",40)
+            texte = police.render("Rentrer votre pseudo",1,(255,255,255))
+            screen.blit(texte,(-275+width/2, -75+height/2))
+
+            for event in events:
+                if event.type == pygame.QUIT:
+                    exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        pseudo = textinput.value 
+
+            # pygame.display.update()
+            # clock.tick(30)
+        else:
+            # Ajout de l'écran de bienvenue
+            screen.blit(play_button, play_button_rect)
+            screen.blit(banner, banner_rect)
 
     # Mettre a jour l'écran
     pygame.display.flip()

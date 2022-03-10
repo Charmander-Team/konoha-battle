@@ -18,6 +18,9 @@ class Game:
 
         self.pressed = {}
 
+        # Récupérer ennemis
+        self.score = 0
+
     def start(self):
         self.is_playing = True
 
@@ -34,9 +37,19 @@ class Game:
         self.player.health = self.player.max_health
         self.is_playing = False
 
-    def update(self, screen):
+    def update(self, screen,pseudo):
         # Appliquer l'image du joueur
         screen.blit(self.player.image, self.player.rect)
+        
+        # Afficher le pseudo du joueur
+        police = pygame.font.SysFont("monospace",25)
+        pseudoTxt = police.render(pseudo,1,(0,0,0))
+        screen.blit(pseudoTxt, (30,30))
+        
+        # Afficher le score du joueur
+        # scoreTxt = police.render(str(self.player.score),1,(0,0,0))
+        scoreTxt = police.render(f"{self.score}",1,(0,0,0))
+        screen.blit(scoreTxt, (30,50))
 
         # Actualiser la vie du joueur
         self.player.update_health_bar(screen)
