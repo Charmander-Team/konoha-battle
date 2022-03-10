@@ -1,7 +1,7 @@
 import pygame
 from projectile import Projectile
 
-# Creer joueur
+# Créer joueur
 class Player(pygame.sprite.Sprite):
 
     def __init__(self, game, name):
@@ -12,6 +12,7 @@ class Player(pygame.sprite.Sprite):
         self.max_health = 100
         self.attack = 55
         self.velocity = 1
+        self.powermode = False
         self.all_projectiles = pygame.sprite.Group()
 
         self.image = pygame.image.load('assets/' + name + '.png')
@@ -43,7 +44,11 @@ class Player(pygame.sprite.Sprite):
         pygame.draw.rect(surface, bar_color, bar_position)
 
     def launch_projectile(self):
-        self.all_projectiles.add(Projectile(self, self.name + '_attack'))
+        if not self.powermode:
+            self.all_projectiles.add(Projectile(self, self.name + '_projectile'))
+        else:
+            self.all_projectiles.add(Projectile(self, self.name + '_super_projectile'))
+
 
     def move_right(self):
         # Si le joueur n'est pas en collision avec un ennemi
@@ -58,6 +63,7 @@ class Player(pygame.sprite.Sprite):
         self.velocity = 3
         self.health = 150
         self.max_health = 150
+        self.powermode = True
 
         self.image = pygame.image.load('assets/' + self.name + '_powermode.png')
         self.image = pygame.transform.scale(self.image, (148*1.6, 125*1.6))
@@ -67,6 +73,7 @@ class Player(pygame.sprite.Sprite):
         self.velocity = 1
         self.health = 100
         self.max_health = 100
+        self.powermode = False
 
         self.image = pygame.image.load('assets/' + self.name + '.png')
         self.image = pygame.transform.scale(self.image, (440/3, 550/3))

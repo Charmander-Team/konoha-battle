@@ -20,14 +20,14 @@ banner_rect.x = math.ceil(screen.get_width() / 3.33)
 banner_rect.y = math.ceil(screen.get_height() / 10)
 
 # Boutton Naruto
-play_button_naruto = pygame.image.load('assets/naruto_button.png')
+play_button_naruto = pygame.image.load('assets/button_naruto.png')
 play_button_naruto = pygame.transform.scale(play_button_naruto, (150, 150))
 play_button_naruto_rect = play_button_naruto.get_rect()
 play_button_naruto_rect.x = math.ceil(screen.get_width() / 2.9)
 play_button_naruto_rect.y = math.ceil(screen.get_height() / 3)
 
 # Boutton Sakura
-play_button_sakura = pygame.image.load('assets/sakura_button.png')
+play_button_sakura = pygame.image.load('assets/button_sakura.png')
 play_button_sakura = pygame.transform.scale(play_button_sakura, (150, 150))
 play_button_sakura_rect = play_button_sakura.get_rect()
 play_button_sakura_rect.x = math.ceil(screen.get_width() / 2)
@@ -51,7 +51,6 @@ while running:
     # Si le jeu n'a pas commencé
     else:
         # Ajout de l'écran de demarrage
-        # screen.blit(play_button, play_button_rect)
         screen.blit(play_button_naruto, play_button_naruto_rect)
         screen.blit(play_button_sakura, play_button_sakura_rect)
         screen.blit(banner, banner_rect)
