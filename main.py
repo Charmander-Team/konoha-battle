@@ -13,24 +13,22 @@ screen = pygame.display.set_mode((1080, 720))
 background = pygame.image.load('assets/bg_forest.jpg')
 
 # Charger la banniere
-banner = pygame.image.load('assets/naruto_banner.png')
+banner = pygame.image.load('assets/game_banner.png')
 banner = pygame.transform.scale(banner, (2560/6, 1090/6))
 banner_rect = banner.get_rect()
 # On utilise math.ceil pour arrondir a un entier
 banner_rect.x = math.ceil(screen.get_width() / 3.33)
 banner_rect.y = math.ceil(screen.get_height() / 10)
 
-
-#choix du perso
-#importer bouton perso naruto
-play_button_naruto = pygame.image.load('assets/banner_naruto.png')
+# Boutton Naruto
+play_button_naruto = pygame.image.load('assets/naruto_button.png')
 play_button_naruto = pygame.transform.scale(play_button_naruto, (150, 150))
 play_button_naruto_rect = play_button_naruto.get_rect()
 play_button_naruto_rect.x = math.ceil(screen.get_width() / 2.9)
 play_button_naruto_rect.y = math.ceil(screen.get_height() / 3)
 
-#importer bouton perso sakura
-play_button_sakura = pygame.image.load('assets/banner_sakura.png')
+# Boutton Sakura
+play_button_sakura = pygame.image.load('assets/sakura_button.png')
 play_button_sakura = pygame.transform.scale(play_button_sakura, (150, 150))
 play_button_sakura_rect = play_button_sakura.get_rect()
 play_button_sakura_rect.x = math.ceil(screen.get_width() / 2)
@@ -60,8 +58,7 @@ while running:
         game.update(screen)
     # Si le jeu n'a pas commencé
     else:
-        # Ajout de l'écran de bienvenue
-        
+        # Ajout de l'écran de demarrage
         screen.blit(play_button, play_button_rect)
         screen.blit(play_button_naruto, play_button_naruto_rect)
         screen.blit(play_button_sakura, play_button_sakura_rect)
@@ -86,7 +83,7 @@ while running:
             if event.key == pygame.K_SPACE:
                 game.player.launch_projectile()
             elif event.key == pygame.K_x:
-                game.player.kyuubi_transformation()
+                game.player.powermode_transformation()
             elif event.key == pygame.K_w:
                 game.player.cancel_transformation()
 
