@@ -7,6 +7,9 @@ class Projectile(pygame.sprite.Sprite):
         self.velocity = 1
         self.player = player
         self.image = pygame.image.load('assets/rasengan.png')
+        #jouer le son 
+        tir_song = pygame.mixer.Sound ("assets/sounds/tir.ogg")
+        tir_song.play()
 
         # Reduction de l'image du projectile
         self.image = pygame.transform.scale(self.image, (70, 70))

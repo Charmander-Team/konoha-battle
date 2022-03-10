@@ -4,6 +4,7 @@ from game import Game
 
 pygame.init()
 
+
 # Generer la fenetre de jeu
 pygame.display.set_caption("Konoha Battle")
 screen = pygame.display.set_mode((1080, 720))
@@ -18,6 +19,10 @@ banner_rect = banner.get_rect()
 # On utilise math.ceil pour arrondir a un entier
 banner_rect.x = math.ceil(screen.get_width() / 5)
 banner_rect.y = math.ceil(screen.get_height() / 5)
+
+
+#choix du perso
+#menu.add.selector('personnage :'), [('naruto', 1), ('sakura',2)], onchange=set_difficulty)
 
 # Importer un bouton pour charger la partie
 play_button = pygame.image.load('assets/button.png')
@@ -78,3 +83,6 @@ while running:
             if play_button_rect.collidepoint(event.pos):
                 # Mettre le jeu en mode "lancé"
                 game.start()
+                #jouer le son
+                click_song = pygame.mixer.Sound("assets/sounds/click.ogg")
+                click_song.play()
