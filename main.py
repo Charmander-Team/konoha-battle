@@ -4,7 +4,6 @@ from game import Game
 
 pygame.init()
 
-
 # Generer la fenetre de jeu
 pygame.display.set_caption("Konoha Battle")
 screen = pygame.display.set_mode((1080, 720))
@@ -34,13 +33,6 @@ play_button_sakura_rect = play_button_sakura.get_rect()
 play_button_sakura_rect.x = math.ceil(screen.get_width() / 2)
 play_button_sakura_rect.y = math.ceil(screen.get_height() / 3)
 
-# Importer un bouton pour charger la partie
-play_button = pygame.image.load('assets/button.png')
-play_button = pygame.transform.scale(play_button, (400, 150))
-play_button_rect = play_button.get_rect()
-play_button_rect.x = math.ceil(screen.get_width() / 3.33)
-play_button_rect.y = math.ceil(screen.get_height() / 2)
-
 # Charger le jeu
 game = Game()
 
@@ -59,7 +51,7 @@ while running:
     # Si le jeu n'a pas commencé
     else:
         # Ajout de l'écran de demarrage
-        screen.blit(play_button, play_button_rect)
+        # screen.blit(play_button, play_button_rect)
         screen.blit(play_button_naruto, play_button_naruto_rect)
         screen.blit(play_button_sakura, play_button_sakura_rect)
         screen.blit(banner, banner_rect)
@@ -92,9 +84,15 @@ while running:
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
             # Verification si la souris est en collision avec le boutton "play"
-            if play_button_rect.collidepoint(event.pos):
-                # Mettre le jeu en mode "lancé"
-                game.start()
-                #jouer le son
+            if play_button_naruto_rect.collidepoint(event.pos):
+                # Incarner Naruto
+                game.start("naruto")
+                # Jouer le son
+                click_song = pygame.mixer.Sound("assets/sounds/click.ogg")
+                click_song.play()
+            elif play_button_sakura_rect.collidepoint(event.pos):
+                # Incarner Sakura
+                game.start("sakura")
+                # Jouer le son
                 click_song = pygame.mixer.Sound("assets/sounds/click.ogg")
                 click_song.play()

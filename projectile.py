@@ -2,11 +2,11 @@ import pygame
 
 class Projectile(pygame.sprite.Sprite):
 
-    def __init__(self, player):
+    def __init__(self, player, type):
         super().__init__()
         self.velocity = 1
         self.player = player
-        self.image = pygame.image.load('assets/rasengan.png')
+        self.image = pygame.image.load('assets/' + type + '.png')
         #jouer le son 
         tir_song = pygame.mixer.Sound ("assets/sounds/tir.ogg")
         tir_song.play()

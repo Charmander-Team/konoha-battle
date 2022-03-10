@@ -4,8 +4,9 @@ from projectile import Projectile
 # Creer joueur
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, game):
+    def __init__(self, game, name):
         super().__init__()
+        self.name = name
         self.game = game
         self.health = 100
         self.max_health = 100
@@ -13,7 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.velocity = 1
         self.all_projectiles = pygame.sprite.Group()
 
-        self.image = pygame.image.load('assets/naruto.png')
+        self.image = pygame.image.load('assets/' + name + '.png')
         self.image = pygame.transform.scale(self.image, (440/3, 550/3))
 
         self.rect = self.image.get_rect()
@@ -42,7 +43,7 @@ class Player(pygame.sprite.Sprite):
         pygame.draw.rect(surface, bar_color, bar_position)
 
     def launch_projectile(self):
-        self.all_projectiles.add(Projectile(self))
+        self.all_projectiles.add(Projectile(self, self.name + '_attack'))
 
     def move_right(self):
         # Si le joueur n'est pas en collision avec un ennemi
@@ -58,7 +59,7 @@ class Player(pygame.sprite.Sprite):
         self.health = 150
         self.max_health = 150
 
-        self.image = pygame.image.load('assets/naruto_powermode.png')
+        self.image = pygame.image.load('assets/' + self.name + '_powermode.png')
         self.image = pygame.transform.scale(self.image, (148*1.6, 125*1.6))
 
     def cancel_transformation(self):
@@ -67,5 +68,5 @@ class Player(pygame.sprite.Sprite):
         self.health = 100
         self.max_health = 100
 
-        self.image = pygame.image.load('assets/naruto.png')
+        self.image = pygame.image.load('assets/' + self.name + '.png')
         self.image = pygame.transform.scale(self.image, (440/3, 550/3))

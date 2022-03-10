@@ -11,18 +11,17 @@ class Game:
 
         # Generer joueur
         self.all_players = pygame.sprite.Group()
-        self.player = Player(self)
-        self.all_players.add(self.player)
 
-
-        
         # Groupe d'ennemis
         self.all_opponents = pygame.sprite.Group()
 
         self.pressed = {}
 
-    def start(self):
+    def start(self, character):
         self.is_playing = True
+
+        self.player = Player(self, character)
+        self.all_players.add(self.player)
 
         # On genere 3 ennemis + 1 "boss"
         self.spawn_opponent(Kabuto)
