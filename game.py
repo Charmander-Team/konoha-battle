@@ -2,6 +2,7 @@ import pygame
 from player import Player
 from opponent import Orochimaru, Kabuto
 
+
 class Game:
 
     def __init__(self):
@@ -10,16 +11,17 @@ class Game:
 
         # Generer joueur
         self.all_players = pygame.sprite.Group()
-        self.player = Player(self)
-        self.all_players.add(self.player)
 
         # Groupe d'ennemis
         self.all_opponents = pygame.sprite.Group()
 
         self.pressed = {}
 
-    def start(self):
+    def start(self, character):
         self.is_playing = True
+
+        self.player = Player(self, character)
+        self.all_players.add(self.player)
 
         # On genere 3 ennemis + 1 "boss"
         self.spawn_opponent(Kabuto)
@@ -33,6 +35,8 @@ class Game:
         self.all_opponents = pygame.sprite.Group()
         self.player.health = self.player.max_health
         self.is_playing = False
+        # Jouer le son
+        pygame.mixer.Sound("assets/sounds/gameover.mp3").play()
 
     def update(self, screen):
         # Appliquer l'image du joueur

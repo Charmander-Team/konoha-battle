@@ -12,19 +12,26 @@ screen = pygame.display.set_mode((1080, 720))
 background = pygame.image.load('assets/bg_forest.jpg')
 
 # Charger la banniere
-banner = pygame.image.load('assets/naruto_banner.png')
-banner = pygame.transform.scale(banner, (2560/4, 1090/4))
+banner = pygame.image.load('assets/game_banner.png')
+banner = pygame.transform.scale(banner, (2560/6, 1090/6))
 banner_rect = banner.get_rect()
 # On utilise math.ceil pour arrondir a un entier
-banner_rect.x = math.ceil(screen.get_width() / 5)
-banner_rect.y = math.ceil(screen.get_height() / 5)
+banner_rect.x = math.ceil(screen.get_width() / 3.33)
+banner_rect.y = math.ceil(screen.get_height() / 10)
 
-# Importer un bouton pour charger la partie
-play_button = pygame.image.load('assets/button.png')
-play_button = pygame.transform.scale(play_button, (400, 150))
-play_button_rect = play_button.get_rect()
-play_button_rect.x = math.ceil(screen.get_width() / 3.33)
-play_button_rect.y = math.ceil(screen.get_height() / 2)
+# Boutton Naruto
+play_button_naruto = pygame.image.load('assets/button_naruto.png')
+play_button_naruto = pygame.transform.scale(play_button_naruto, (150, 150))
+play_button_naruto_rect = play_button_naruto.get_rect()
+play_button_naruto_rect.x = math.ceil(screen.get_width() / 2.9)
+play_button_naruto_rect.y = math.ceil(screen.get_height() / 3)
+
+# Boutton Sakura
+play_button_sakura = pygame.image.load('assets/button_sakura.png')
+play_button_sakura = pygame.transform.scale(play_button_sakura, (150, 150))
+play_button_sakura_rect = play_button_sakura.get_rect()
+play_button_sakura_rect.x = math.ceil(screen.get_width() / 2)
+play_button_sakura_rect.y = math.ceil(screen.get_height() / 3)
 
 # Charger le jeu
 game = Game()
@@ -43,8 +50,9 @@ while running:
         game.update(screen)
     # Si le jeu n'a pas commencé
     else:
-        # Ajout de l'écran de bienvenue
-        screen.blit(play_button, play_button_rect)
+        # Ajout de l'écran de demarrage
+        screen.blit(play_button_naruto, play_button_naruto_rect)
+        screen.blit(play_button_sakura, play_button_sakura_rect)
         screen.blit(banner, banner_rect)
 
     # Mettre a jour l'écran
@@ -66,7 +74,7 @@ while running:
             if event.key == pygame.K_SPACE:
                 game.player.launch_projectile()
             elif event.key == pygame.K_x:
-                game.player.kyuubi_transformation()
+                game.player.powermode_transformation()
             elif event.key == pygame.K_w:
                 game.player.cancel_transformation()
 
@@ -75,6 +83,13 @@ while running:
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
             # Verification si la souris est en collision avec le boutton "play"
-            if play_button_rect.collidepoint(event.pos):
-                # Mettre le jeu en mode "lancé"
-                game.start()
+            if play_button_naruto_rect.collidepoint(event.pos):
+                # Incarner Naruto
+                game.start("naruto")
+                # Jouer le son
+                pygame.mixer.Sound("assets/sounds/naruto_voice.mp3").play()
+            elif play_button_sakura_rect.collidepoint(event.pos):
+                # Incarner Sakura
+                game.start("sakura")
+                # Jouer le son
+                pygame.mixer.Sound("assets/sounds/sakura_voice.mp3").play()
