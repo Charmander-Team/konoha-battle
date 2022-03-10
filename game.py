@@ -33,6 +33,8 @@ class Game:
         self.spawn_opponent(Kabuto)
         self.spawn_opponent(Kabuto)
         self.spawn_opponent(Kabuto)
+        self.spawn_opponent(Kabuto)
+        self.spawn_opponent(Kabuto)
         self.spawn_opponent(Orochimaru)
 
 

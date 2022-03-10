@@ -27,13 +27,13 @@ class Opponent(pygame.sprite.Sprite):
         # Infliger les dégats
         self.health -= amount
 
-
         # Verifier si sa vie est < 0
         if self.health <= 0:
             
             # Réapparaitre (comme un nouvel ennemi)
-            # self.rect.x = 1000 + random.randint(0, 300)
+            
             self.health = self.max_health
+            self.kill()
             
 
     def update_health_bar(self, surface):
