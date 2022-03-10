@@ -15,8 +15,6 @@ class Player(pygame.sprite.Sprite):
 
         self.powermode = False
         self.all_projectiles = pygame.sprite.Group()
-        # self.sound = "rasengan"
-        # self.super_sound = "rasengan"
 
         self.image = pygame.image.load('assets/' + name + '.png')
         self.image = pygame.transform.scale(self.image, (self.image.get_width() * 1.6, self.image.get_height() * 1.6))
@@ -71,8 +69,7 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.image.load('assets/' + self.name + '_powermode.png')
         self.image = pygame.transform.scale(self.image, (self.image.get_width() * 1.6, self.image.get_height() * 1.6))
 
-        game_over_song = pygame.mixer.Sound("assets/sounds/chakra_ready.mp3")
-        game_over_song.play()
+        pygame.mixer.Sound("assets/sounds/chakra_ready.mp3").play()
 
     def cancel_transformation(self):
         self.attack = 55

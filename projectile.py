@@ -9,11 +9,10 @@ class Projectile(pygame.sprite.Sprite):
         self.image = pygame.image.load('assets/' + type + '.png')
 
         # Jouer le son
-        attack_sound = pygame.mixer.Sound('assets/sounds/' + sound + '.mp3')
-        attack_sound.play()
+        pygame.mixer.Sound('assets/sounds/' + sound + '.mp3').play()
 
         # Reduction de l'image du projectile
-        self.image = pygame.transform.scale(self.image, (70, 70))
+        self.image = pygame.transform.scale(self.image, (70, 70 ))
 
         self.rect = self.image.get_rect()
 

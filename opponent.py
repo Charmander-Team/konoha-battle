@@ -13,7 +13,7 @@ class Opponent(pygame.sprite.Sprite):
 
         # Recuperer l'image de l'ennemi
         self.image = pygame.image.load('assets/' + name + '.png')
-        self.image = pygame.transform.scale(self.image, (148*1.5, 125*1.5))
+        self.image = pygame.transform.scale(self.image, (self.image.get_width() * 1.5, self.image.get_height() * 1.5))
         self.rect = self.image.get_rect()
 
         # Positionner l'image

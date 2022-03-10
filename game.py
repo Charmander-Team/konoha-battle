@@ -36,8 +36,7 @@ class Game:
         self.player.health = self.player.max_health
         self.is_playing = False
         # Jouer le son
-        game_over_song = pygame.mixer.Sound("assets/sounds/gameover.mp3")
-        game_over_song.play()
+        pygame.mixer.Sound("assets/sounds/gameover.mp3").play()
 
     def update(self, screen):
         # Appliquer l'image du joueur
