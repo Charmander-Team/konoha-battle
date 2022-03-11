@@ -2,14 +2,17 @@ import pygame
 
 class Projectile(pygame.sprite.Sprite):
 
-    def __init__(self, player):
+    def __init__(self, player, type, sound):
         super().__init__()
         self.velocity = 1
         self.player = player
-        self.image = pygame.image.load('assets/rasengan.png')
+        self.image = pygame.image.load('assets/' + type + '.png')
+
+        # Jouer le son
+        pygame.mixer.Sound('assets/sounds/' + sound + '.mp3').play()
 
         # Reduction de l'image du projectile
-        self.image = pygame.transform.scale(self.image, (70, 70))
+        self.image = pygame.transform.scale(self.image, (70, 70 ))
 
         self.rect = self.image.get_rect()
 
