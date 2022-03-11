@@ -29,9 +29,7 @@ class Opponent(pygame.sprite.Sprite):
 
         # Verifier si sa vie est < 0
         if self.health <= 0:
-            
-            # Réapparaitre (comme un nouvel ennemi)
-            
+            self.game.score += self.scoreIncrement
             self.health = self.max_health
             self.kill()
             
@@ -80,6 +78,7 @@ class Orochimaru(Opponent):
 
         # Verifier si sa vie est < 0
         if self.health <= 0:
+            self.game.score += self.scoreIncrement
             self.kill()
                         
 

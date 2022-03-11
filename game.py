@@ -2,8 +2,7 @@ import pygame
 import json 
 from player import Player
 from opponent import Orochimaru, Kabuto
-
-
+import opponent
 class Game:
 
     def __init__(self):
@@ -24,20 +23,16 @@ class Game:
         self.score = 0
 
         # Set pseudo
-        self.pseudo = "Alexandre"
+        self.pseudo = ""
 
     def start(self):
         self.is_playing = True
-
-        # On genere 3 ennemis + 1 "boss"
-        self.spawn_opponent(Kabuto)
-        self.spawn_opponent(Kabuto)
-        self.spawn_opponent(Kabuto)
-        self.spawn_opponent(Kabuto)
-        self.spawn_opponent(Kabuto)
-        if self.score >= 300:
+        i = 1
+        while i < 5:
+            self.spawn_opponent(Kabuto)
+            i += 1
+        else:
             self.spawn_opponent(Orochimaru)
-
 
     def game_over(self):
         # Reset du jeu (retirer les ennemis, remettre le joueur a 100 de vie, remettre la banniere de lancement)
