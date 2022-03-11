@@ -37,7 +37,7 @@ play_button_sakura_rect.y = math.ceil(screen.get_height() / 3)
 
 # Définir la zonne de saisie de texte du joueur
 textinput = pygame_textinput.TextInputVisualizer()
-pseudo=""
+pseudo = ""
 
 # data score
 loopDataScore = 0
@@ -56,50 +56,63 @@ while running:
     # Verifier si le jeu a commencé
     if game.is_playing:
         # Déclencher les instructions de partie
-        game.update(screen,pseudo)
+        game.update(screen, pseudo)
         
     # Si le jeu n'a pas commencé
     else:
 
-        if pseudo=="":
-            # Le joueur renseigne son pseudo
-            events = pygame.event.get()
+        # Si pas de pseudo
+        if pseudo == "":
 
+            events = pygame.event.get()
+            # Gestion de l'input
             textinput.update(events)
             textinput.cursor_blink_interval = 100
+
+            # On set la longueur et la largeur de l'ecran
             width, height = screen.get_size()
-            screen.blit(textinput.surface, (-400+width/2, height/2))
+            # Affichage de l'input
+            screen.blit(textinput.surface, (-400 + width / 2, height / 2))
 
-            color = (0,0,0) 
-            pygame.draw.rect(screen, color, pygame.Rect(-405+width/2, -5+height/2, 700, 40),  2)
+            # Couleur de l'input
+            color = (0, 0, 0)
 
-            police = pygame.font.SysFont("monospace",40)
-            texte = police.render("Rentrer votre pseudo",1,(255,255,255))
-            screen.blit(texte,(-275+width/2, -75+height/2))
+            # Affichage du carré contenant l'input
+            pygame.draw.rect(screen, color, pygame.Rect(-405 + width / 2, -5 + height / 2, 700, 40),  2)
+
+            # Gestion du titre de l'input
+            police = pygame.font.SysFont("monospace", 40)
+            text = police.render("Rentrer votre pseudo", 1, (255, 255, 255))
+
+            # Affichage du titre de l'input
+            screen.blit(text, (-275 + width / 2, -75 + height / 2))
 
             for event in events:
                 if event.type == pygame.QUIT:
                     exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
+                        # Enregistrement du pseudo apres appuie sur "enter"
                         pseudo = textinput.value 
 
         else:
+            # Gestion de la police et de la taille du score
+            police = pygame.font.SysFont("monospace", 20)
+            head = police.render("Pseudo Score", 1, (0, 0, 0))
+
             # Ajout de l'écran de demarrage
             screen.blit(play_button_naruto, play_button_naruto_rect)
             screen.blit(play_button_sakura, play_button_sakura_rect)
             screen.blit(banner, banner_rect)
+            screen.blit(head, (30, 10))
 
-            police = pygame.font.SysFont("monospace",20)
-            head = police.render("Pseudo Score",1,(0,0,0))
-            screen.blit(head, (30,10))
-
-
+            # Lecture du score.json
             with open("score.json", 'r') as objfile:
                 if loopDataScore < 1:
                     data = json.loads(objfile.read())
-                    print(data)    
-            data.sort(key=lambda x: x.get('score'),reverse=True)
+
+            # Affichage des 3 premieres (ordre décroissant)
+            data.sort(key=lambda x: x.get('score'), reverse=True)
             loopDataScore += 1
 
             i = 0
@@ -107,12 +120,12 @@ while running:
             for d in data:
                 if loop == 3:
                     break
-                ligne = police.render(f"{d['pseudo']} {d['score']}",1,(0,0,0))
-                screen.blit(ligne, (30,30+i))
-                i+=20
-                loop +=1
+                ligne = police.render(f"{d['pseudo']} {d['score']}", 1, (0, 0, 0))
+                screen.blit(ligne, (30, 30 + i))
+                i += 20
+                loop += 1
 
-    # Mettre a jour l'écran
+    # Mettre à jour l'écran
     pygame.display.flip()
 
     # Si le joueur ferme la fenetre
