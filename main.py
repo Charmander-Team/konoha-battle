@@ -85,11 +85,11 @@ while running:
             # Verification si la souris est en collision avec le boutton "play"
             if play_button_naruto_rect.collidepoint(event.pos):
                 # Incarner Naruto
-                game.start("naruto")
+                game.start('naruto', 'rasengan', 'oodame_rasengan')
                 # Jouer le son
                 pygame.mixer.Sound("assets/sounds/naruto_voice.mp3").play()
             elif play_button_sakura_rect.collidepoint(event.pos):
                 # Incarner Sakura
-                game.start("sakura")
+                game.start('sakura', 'kunai', 'double_kunai')
                 # Jouer le son
-                pygame.mixer.Sound("assets/sounds/sakura_voice.mp3").play()
+                pygame.mixer.Sound('assets/sounds/sakura_voice.mp3').play()

@@ -4,7 +4,7 @@ from projectile import Projectile
 # Créer joueur
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, game, name):
+    def __init__(self, game, name, sound_attack, sound_powermode_attack):
         super().__init__()
         self.name = name
         self.game = game
@@ -12,6 +12,9 @@ class Player(pygame.sprite.Sprite):
         self.max_health = 100
         self.attack = 55
         self.velocity = 1
+
+        self.sound_attack = sound_attack
+        self.sound_powermode_attack = sound_powermode_attack
 
         self.powermode = False
         self.all_projectiles = pygame.sprite.Group()
@@ -46,9 +49,9 @@ class Player(pygame.sprite.Sprite):
 
     def launch_projectile(self):
         if not self.powermode:
-            self.all_projectiles.add(Projectile(self, self.name + '_projectile', 'kunai'))
+            self.all_projectiles.add(Projectile(self, self.name + '_projectile', self.sound_attack ))
         else:
-            self.all_projectiles.add(Projectile(self, self.name + '_super_projectile', 'kunai'))
+            self.all_projectiles.add(Projectile(self, self.name + '_super_projectile', self.sound_powermode_attack))
 
 
     def move_right(self):

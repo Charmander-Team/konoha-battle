@@ -17,10 +17,10 @@ class Game:
 
         self.pressed = {}
 
-    def start(self, character):
+    def start(self, character, sound_attack, sound_powermode_attack):
         self.is_playing = True
 
-        self.player = Player(self, character)
+        self.player = Player(self, character, sound_attack, sound_powermode_attack)
         self.all_players.add(self.player)
 
         # On genere 3 ennemis + 1 "boss"
