@@ -1,3 +1,5 @@
+import json
+import pygame_textinput
 import pygame
 import math
 from game import Game
@@ -33,6 +35,13 @@ play_button_sakura_rect = play_button_sakura.get_rect()
 play_button_sakura_rect.x = math.ceil(screen.get_width() / 2)
 play_button_sakura_rect.y = math.ceil(screen.get_height() / 3)
 
+# Définir la zonne de saisie de texte du joueur
+textinput = pygame_textinput.TextInputVisualizer()
+pseudo=""
+
+# data score
+loopDataScore = 0
+
 # Charger le jeu
 game = Game()
 
@@ -47,13 +56,61 @@ while running:
     # Verifier si le jeu a commencé
     if game.is_playing:
         # Déclencher les instructions de partie
-        game.update(screen)
+        game.update(screen,pseudo)
+        
     # Si le jeu n'a pas commencé
     else:
-        # Ajout de l'écran de demarrage
-        screen.blit(play_button_naruto, play_button_naruto_rect)
-        screen.blit(play_button_sakura, play_button_sakura_rect)
-        screen.blit(banner, banner_rect)
+
+        if pseudo=="":
+            # Le joueur renseigne son pseudo
+            events = pygame.event.get()
+
+            textinput.update(events)
+            textinput.cursor_blink_interval = 100
+            width, height = screen.get_size()
+            screen.blit(textinput.surface, (-400+width/2, height/2))
+
+            color = (0,0,0) 
+            pygame.draw.rect(screen, color, pygame.Rect(-405+width/2, -5+height/2, 700, 40),  2)
+
+            police = pygame.font.SysFont("monospace",40)
+            texte = police.render("Rentrer votre pseudo",1,(255,255,255))
+            screen.blit(texte,(-275+width/2, -75+height/2))
+
+            for event in events:
+                if event.type == pygame.QUIT:
+                    exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        pseudo = textinput.value 
+
+        else:
+            # Ajout de l'écran de demarrage
+            screen.blit(play_button_naruto, play_button_naruto_rect)
+            screen.blit(play_button_sakura, play_button_sakura_rect)
+            screen.blit(banner, banner_rect)
+
+            police = pygame.font.SysFont("monospace",20)
+            head = police.render("Pseudo Score",1,(0,0,0))
+            screen.blit(head, (30,10))
+
+
+            with open("score.json", 'r') as objfile:
+                if loopDataScore < 1:
+                    data = json.loads(objfile.read())
+                    print(data)    
+            data.sort(key=lambda x: x.get('score'),reverse=True)
+            loopDataScore += 1
+
+            i = 0
+            loop = 0
+            for d in data:
+                if loop == 3:
+                    break
+                ligne = police.render(f"{d['pseudo']} {d['score']}",1,(0,0,0))
+                screen.blit(ligne, (30,30+i))
+                i+=20
+                loop +=1
 
     # Mettre a jour l'écran
     pygame.display.flip()
@@ -82,13 +139,20 @@ while running:
             game.pressed[event.key] = False
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            # Verification si la souris est en collision avec le boutton "play"
+
+            # Verification si la souris est en collision avec le boutton "personnage"
             if play_button_naruto_rect.collidepoint(event.pos):
+
+                # Init data json
+                loopDataScore = 0
                 # Incarner Naruto
                 game.start('naruto', 'rasengan', 'oodama_rasengan')
                 # Jouer le son
                 pygame.mixer.Sound("assets/sounds/naruto_voice.mp3").play()
             elif play_button_sakura_rect.collidepoint(event.pos):
+                
+                # Init data json
+                loopDataScore = 0
                 # Incarner Sakura
                 game.start('sakura', 'kunai', 'double_kunai')
                 # Jouer le son

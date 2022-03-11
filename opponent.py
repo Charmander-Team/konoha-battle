@@ -20,15 +20,22 @@ class Opponent(pygame.sprite.Sprite):
         self.rect.x = 1000 + random.randint(0, 300)
         self.rect.y = 510
 
+        # Init score incrément de l'ennemi
+        self.scoreIncrement = 0
+
     def damage(self, amount):
         # Infliger les dégats
         self.health -= amount
+
 
         # Verifier si sa vie est < 0
         if self.health <= 0:
             # Réapparaitre (comme un nouvel ennemi)
             self.rect.x = 1000 + random.randint(0, 300)
             self.health = self.max_health
+            
+            # incrémentation du score
+            self.game.score += self.scoreIncrement
 
     def update_health_bar(self, surface):
         # Definir une couleur pour la jauge de vie
@@ -60,6 +67,7 @@ class Orochimaru(Opponent):
         super().__init__(game, "orochimaru")
         self.health = 200
         self.max_health = 200
+        self.scoreIncrement = 15
 
     def update_health_bar(self, surface):
 
@@ -72,3 +80,4 @@ class Kabuto(Opponent):
 
     def __init__(self, game):
         super().__init__(game, "kabuto")
+        self.scoreIncrement = 5
