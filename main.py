@@ -45,6 +45,8 @@ loopDataScore = 0
 # Charger le jeu
 game = Game()
 
+flag = False
+
 running = True
 # Boucle tant que running = True
 while running:
@@ -141,8 +143,15 @@ while running:
         elif event.type == pygame.KEYDOWN:
             game.pressed[event.key] = True
 
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_SPACE and flag == False:
+                start = pygame.time.get_ticks()
                 game.player.launch_projectile()
+                flag = True
+
+            # Gére le delai d'appui de bouton entre les projectiles
+            if flag == True and pygame.time.get_ticks() - start >= 1000:
+                flag = False
+            
             elif event.key == pygame.K_LCTRL:
                 game.player.powermode_transformation()
             elif event.key == pygame.K_LALT:
