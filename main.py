@@ -143,9 +143,9 @@ while running:
 
             if event.key == pygame.K_SPACE:
                 game.player.launch_projectile()
-            elif event.key == pygame.K_x:
+            elif event.key == pygame.K_LCTRL:
                 game.player.powermode_transformation()
-            elif event.key == pygame.K_w:
+            elif event.key == pygame.K_LALT:
                 game.player.cancel_transformation()
 
         elif event.type == pygame.KEYUP:
