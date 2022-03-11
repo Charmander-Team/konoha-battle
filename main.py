@@ -1,3 +1,4 @@
+import json
 import pygame_textinput
 import pygame
 import math
@@ -29,8 +30,10 @@ play_button_rect.y = math.ceil(screen.get_height() / 2)
 
 # Définir la zonne de saisie de texte du joueur
 textinput = pygame_textinput.TextInputVisualizer()
-# clock = pygame.time.Clock()
 pseudo=""
+
+# data score
+loopDataScore = 0
 
 # Charger le jeu
 game = Game()
@@ -80,6 +83,28 @@ while running:
             screen.blit(play_button, play_button_rect)
             screen.blit(banner, banner_rect)
 
+            police = pygame.font.SysFont("monospace",20)
+            head = police.render("Pseudo Score",1,(0,0,0))
+            screen.blit(head, (30,10))
+
+
+            with open("score.json", 'r') as objfile:
+                if loopDataScore < 1:
+                    data = json.loads(objfile.read())
+                    print(data)    
+            data.sort(key=lambda x: x.get('score'),reverse=True)
+            loopDataScore += 1
+
+            i = 0
+            loop = 0
+            for d in data:
+                if loop == 3:
+                    break
+                ligne = police.render(f"{d['pseudo']} {d['score']}",1,(0,0,0))
+                screen.blit(ligne, (30,30+i))
+                i+=20
+                loop +=1
+
     # Mettre a jour l'écran
     pygame.display.flip()
 
@@ -110,4 +135,5 @@ while running:
             # Verification si la souris est en collision avec le boutton "play"
             if play_button_rect.collidepoint(event.pos):
                 # Mettre le jeu en mode "lancé"
+                loopDataScore = 0
                 game.start()
