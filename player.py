@@ -40,8 +40,8 @@ class Player(pygame.sprite.Sprite):
         back_bar_color = (60, 63, 60)
 
         # Definir la position de la jauge de vie (ainsi que largeur et epaisseur)
-        bar_position = [self.rect.x + 20, self.rect.y - 10, self.health, 7]
-        back_bar_position = [self.rect.x + 20, self.rect.y - 10, self.max_health, 7]
+        bar_position = [self.rect.x + 50, self.rect.y - 10, self.health, 7]
+        back_bar_position = [self.rect.x + 50, self.rect.y - 10, self.max_health, 7]
 
         # Dessiner la barre de vie (background en 1er)
         pygame.draw.rect(surface, back_bar_color, back_bar_position)
