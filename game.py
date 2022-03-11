@@ -24,7 +24,7 @@ class Game:
         self.score = 0
 
         # Set pseudo
-        self.pseudo = ""
+        self.pseudo = "Alexandre"
 
     def start(self):
         self.is_playing = True
@@ -35,7 +35,8 @@ class Game:
         self.spawn_opponent(Kabuto)
         self.spawn_opponent(Kabuto)
         self.spawn_opponent(Kabuto)
-        self.spawn_opponent(Orochimaru)
+        if self.score >= 300:
+            self.spawn_opponent(Orochimaru)
 
 
     def game_over(self):
